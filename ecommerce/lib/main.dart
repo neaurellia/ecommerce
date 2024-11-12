@@ -1,4 +1,4 @@
-import 'package:ecommerce/menu.dart';
+import 'package:ecommerce/screens/menu.dart';
 import 'package:flutter/material.dart';
 
 void main() {
