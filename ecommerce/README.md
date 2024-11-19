@@ -1,3 +1,63 @@
+assignment 9
+1. We need to create a model to retrieve or send JSON data because the help to structure the data received from/sent to the server. The models map JSON keys to easily accessible attributes to reduce errors in manual parsing. The models also ease modification or extending data handling logic so that if the API changes, we can only modify the model instead of updating the code throughout the app. Models also ensure that the data types and formats are consistent so that it avoids runtime type errors.
+
+2. We use the http library in this task to send HTTP requests and receive responses from a server. In the context of this assignment, the http library facilitates communication between my Flutter app and the Django backend by sending data (like login credentials) and receiving responses (like authentication tokens or user data).
+
+3. CookieRequest is typically a custom class or library that manages HTTP requests while handling cookies automatically. In web-based authentication, cookies are used to maintain user sessions. They automatically store and send cookies (ex:  session IDs) with each request, ensuring authenticated communication. They also simplify making authenticated requests by abstracting cookie handling and prevents manually adding sensitive data like session tokens in headers. We share it across components in Flutter because it ensures that all components of the app share the same session state and avoids redundancy and minimizes resource usage. It also ensures requests made from any part of the app are authenticated (using the same cookies).
+
+4. Input:
+- User provides input (ex: form data) in the Flutter UI and validated locally
+Data Transmission:
+- The validated input is sent to the backend using an HTTP request (ex: POST with JSON payload)
+- The backend processes the data and sends a response (ex: success or failure, along with data)
+Processing Response:
+- The app parses the backend's JSON response into a model object or directly extracts relevant data.
+- Errors are handled, and feedback is shown to the user.
+Display:
+- Parsed data is passed to Flutter widgets for rendering on the UI.
+
+5. Login Process:
+1. Flutter: 
+- user enters credentials (ex: email and password)
+- app sends a POST request with the credentials to the Django backend
+2. Django: 
+- verifies the credentials against the database
+- if valid, generates a session token or returns an existing session cookie
+- sends a success response (ex: 200 OK) including the session token or cookie
+3. Flutter:
+- stores the session token or cookie using CookieRequest or local storage
+- navigates to the authenticated area (ex: dashboard)
+
+Register Process:
+1. Flutter:
+- user provides registration data (ex:  email, username, password)
+- sends the data to the Django backend via a POST request
+2. Django:
+- validates the data and creates a new user account
+- returns a success response or errors (ex:  "email already exists")
+3. Flutter:
+- if successful, redirects to the login screen.
+
+Logout Process:
+1. Flutter:
+- sends a logout request to Django (ex:  POST /logout)
+- clears stored session data locally
+2. Django:
+- deletes the session token or cookie
+- returns a success response
+
+6. This assignment asks us for Django-Flutter authentication integration. We do this by firstly setting up the authentication in Django for Flutter. Here we make a new django-app called authentication, and add it into INSTALLED_APPS, here we also install django-cors-headers, then we add the view methods and routings for login in the authentication app.
+
+The next step would be to integrate the authentication system in Flutter. Here we run the commands flutter pub add provider and flutter pub add pbp_django_auth and then provide CookieRequest library using Provider and took care of login. We also made a register function here and took care of its views and url routing.
+
+After that we customed model creation by using JSON data with the Quicktype website, then we fetched Data from Django and showed them in the Flutter app by adding HTTP dependency. We fetch the data by the list_productentry.dart and left drawer.
+
+To integrate the Flutter form with the Django Service, we:
+1. Create a new views function and take care of the routing in Django
+2. Connect product_entry_form.dart to CookieRequest in Flutter
+
+Last we implement the logout feature by adding a views method in the authentication app and take care of the url routing in Django, then edit the CookieRequest and Inkwell in Flutter
+
 assignment 8
 1. Const ensures that a created object is immutable, hence its state cannot be changed after creation. 
 
